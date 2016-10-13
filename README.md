@@ -1,20 +1,13 @@
-# 码志
+# Knight
 
-我的个人博客：<http://mazhuang.org>，欢迎 Star 和 Fork。
+我的个人博客：<http://wanghaoguan.github.io>，欢迎 Star 和 Fork。
 
 ## 概览
 
-* [效果预览](#效果预览)
 * [Fork 指南](#fork-指南)
 * [贴心提示](#贴心提示)
 * [经验与思考](#经验与思考)
-* [致谢](#致谢)
 
-## 效果预览
-
-### [在线预览 &rarr;](http://mazhuang.org)
-
-![screenshot home](http://mazhuang.org/assets/images/screenshots/home.png)
 
 ## Fork 指南
 
@@ -32,7 +25,6 @@ Fork 本项目之后，还需要做一些事情才能让你的页面「正确」
 
    网站的配置基本都集中在 \_config.yml 文件中，将其中与个人信息相关的部分替换成你自己的，比如网站的 title、subtitle、duoshuo 和 Disqus 的用户名等。
 
-   **注意：** 因为 Disqus 处理用户名与域名白名单的策略存在缺陷，请一定将 disqus\_username 修改成你自己的。我对该缺陷的记录见 [Issues#2][3]。
 
 4. 删除我的文章与图片。
 
@@ -67,10 +59,3 @@ Fork 本项目之后，还需要做一些事情才能让你的页面「正确」
 
 * 可以学习一下那些高质量的博主，他们的行文，内容组织方式，有什么值得借鉴的地方。
 
-## 致谢
-
-本博客外观基于 [DONGChuan](http://dongchuan.github.io) 修改，感谢！
-
-[1]: https://github.com/mzlogin/chinese-copywriting-guidelines
-[2]: https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/
-[3]: https://github.com/mzlogin/mzlogin.github.io/issues/2
