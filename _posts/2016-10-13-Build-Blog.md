@@ -37,5 +37,5 @@ keywords: blog，git，jeklly
 ![github-store](/images/posts/github/github-store.png)
 
 
-### 关键的后续内容，明天补充
+### 后续内容，明天补充
 	
