@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 使用Github和Jekyll搭建个人博客
+title: 使用Github和Jekyll搭建个人博客(一)
 categories: Github
 description: 一直都有搭建一个个人博客的想法，刚好近日空闲时间比较多，于是用了一天的时间完成了第一版的个人独立博客的搭建
 keywords: blog，git，jeklly
@@ -35,4 +35,7 @@ keywords: blog，git，jeklly
 	把本地`master分支`的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库！
 
 ![github-store](/images/posts/github/github-store.png)
+
+
+### 关键的后续内容，明天补充
 	
