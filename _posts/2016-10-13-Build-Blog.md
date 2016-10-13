@@ -18,7 +18,7 @@ keywords: blog，git，jeklly
 
 1. 如果你没有接触过github，你需要先注册一个	github的帐号，并登录    
    	到github.com。然后就可以看到自己的主页啦。
-	[github-main](/images/posts/github/github-main.png)
+[github-main](/images/posts/github/github-main.png)
 
 2. 在右上角找到“Create a new repo”按钮，创建一	个仓库，仓库名为：`username.github.io`,其	中 `username` 是你的用户名。
 
@@ -34,5 +34,5 @@ keywords: blog，git，jeklly
 
 	把本地`master分支`的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库！
 
-	[github-store](/images/posts/github/github-store.png)
+[github-store](/images/posts/github/github-store.png)
 	
