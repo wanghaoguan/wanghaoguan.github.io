@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://mazhuang.org
+url: https://wanghaoguan.github.io/
 date_format: "ordinal"
 title: Knight
 subtitle: "青春在风中飘扬"
