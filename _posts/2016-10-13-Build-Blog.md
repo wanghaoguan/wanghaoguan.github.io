@@ -3,7 +3,7 @@ layout: post
 title: 使用Github和Jekyll搭建个人博客
 categories: Github
 description: 一直都有搭建一个个人博客的想法，刚好近日空闲时间比较多，于是用了一天的时间完成了第一版的个人独立博客的搭建
-keywords: github, jekyll
+keywords: github, jekyll,搭建
 ---
 
 
