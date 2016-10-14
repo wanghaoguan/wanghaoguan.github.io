@@ -3,7 +3,7 @@ layout: post
 title: 使用Github和Jekyll搭建个人博客
 categories: Github
 description: 博客的搭建
-keywords: github, jekyll,搭建
+keywords: github, jekyll, 搭建
 ---
 
 
