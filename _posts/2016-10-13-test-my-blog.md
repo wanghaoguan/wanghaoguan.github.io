@@ -3,7 +3,7 @@ layout: post
 title: A Little Sweet Story
 categories: Blog
 description: test programmer,new point
-keywords: blog, test
+keywords: blog, story,sweet
 ---
 
 嘈杂的costa咖啡店里，一男一女拘束的坐着。男的像个程序员，女的皮肤白皙，娇小可爱。
