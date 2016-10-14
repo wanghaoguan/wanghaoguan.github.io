@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://wanghaoguan.github.io
+url: http://wanghaoguan.github.io
 date_format: "ordinal"
 title: Knight
 subtitle: "青春在风中飘扬"
