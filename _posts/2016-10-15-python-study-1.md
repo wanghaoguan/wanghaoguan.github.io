@@ -34,5 +34,26 @@ Python的特点可以总结为：
 
 ![python-test-1](/images/posts/python/test-1.png)
 
+### 使用文本编辑器
 
+在控制台用命令行写程序，可以立即得到结果，但程序无法保存。所以我们实际开发中，需要使用文本编辑器来编辑代码，将代码保存为文件就可以反复运行。  
+
+我在这里使用的是Sublime Text，这款编辑器具有漂亮的用户界面和强大的功能,支持丰富的插件管理。Sublime Text 是一个跨平台的编辑器，同时支持Windows、Linux、Mac OS X等操作系统。关于这款编辑器的详细情况可以参考：
+<http://baike.baidu.com/link?url=1pKMEKuBtPZ_eI4S49YXoiKUIpwbtXyP1fv7-WZmhZ96nzFnP96ciS9jjHLRjmj86yDMahuvwJ-rR1bTQDKWY9uaq8ddylAK2VmZiTw2j2a>
+
+在Sublime Text中新建文件，输入代码 `print 'hello,world'`，并保存为`hello.py`。
+
+![python-edit-1](/images/posts/python/edit-1.png)
+
+然后打开命令行窗口，切换到当前目录，就可以运行这个程序了。
+
+![python-test-2](/images/posts/python/test-2.png)
+
+Python的交互模式和直接运行.py文件有什么区别呢？
+
+直接输入python进入交互模式，相当于启动了Python解释器，但是等待你一行一行地输入源代码，每输入一行就执行一行。
+
+直接运行.py文件相当于启动了Python解释器，然后一次性把.py文件的源代码给执行了，你是没有机会输入源代码的。
+
+用Python开发程序，完全可以一边在文本编辑器里写代码，一边开一个交互式命令窗口，在写代码的过程中，把部分代码粘到命令行去验证，事半功倍！
 
