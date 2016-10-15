@@ -19,6 +19,8 @@ Python的特点可以总结为：
 ### 在win7安装Python
 
 首先，需要从从Python的官方网站<http://www.python.org>下载python,然后运行下载的msi安装包，安装所有组件，安装时要选择`Add python.exe to Path`将安装路径添加到系统`Path`环境变量。然后一路`next`到安装程序完成。  
+![python-install-1](/images/posts/python/install-1.png)
+
 安装结束后，打开cmd控制台，输入python，如果出现以下画面，则证明python已成功安装。
 
 ![python-install](/images/posts/python/install.png)
