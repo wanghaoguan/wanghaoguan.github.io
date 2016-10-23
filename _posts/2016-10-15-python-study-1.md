@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python基础（一）
+title: Python基础
 categories: Python
 description: python的学习
 keywords: python,basic
@@ -49,6 +49,16 @@ Python的特点可以总结为：
 
 ![python-test-2](/images/posts/python/test-2.png)
 
+### 输入和输出
+
+输出：通过 `print`加上输出字符串组成，测试用例：`>>>print 'hello,world'`  
+
+`print`后字符串语句可以跟多个字符串，用逗号隔开，可以一连串输出，用例：`print 'hello','world'`  
+
+输入：python提供了一个`raw_input`函数，用户可以通过这个函数将输入字符串存到一个变量。用例：`name = raw_input()`，当回车后，命令行会等待你的输入，输入任意字符按回车完成输入。
+
+![python-test-3](/images/posts/python/test-3.png)
+
 Python的交互模式和直接运行.py文件有什么区别呢？
 
 直接输入python进入交互模式，相当于启动了Python解释器，但是等待你一行一行地输入源代码，每输入一行就执行一行。
@@ -56,4 +66,6 @@ Python的交互模式和直接运行.py文件有什么区别呢？
 直接运行.py文件相当于启动了Python解释器，然后一次性把.py文件的源代码给执行了，你是没有机会输入源代码的。
 
 用Python开发程序，完全可以一边在文本编辑器里写代码，一边开一个交互式命令窗口，在写代码的过程中，把部分代码粘到命令行去验证，事半功倍！
+
+
 
