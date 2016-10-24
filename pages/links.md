@@ -12,4 +12,7 @@ permalink: /links/
 
 * [Artech](http://www.cnblogs.com/artech/)
 * [三生石上](http://www.cnblogs.com/sanshi/)
+* [PGP](www.rutk1t0r.cn)
+* [方小白](http://www.cnblogs.com/fangyz)
+* [源神](http://www.hicoder.cn/)
 * [Knight](http://wanghaoguan.github.io)
