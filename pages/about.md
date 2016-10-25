@@ -12,15 +12,15 @@ permalink: /about/
 
 「人类最大的武器，是豁出去的决心」。
 
-## 坚信
+## Belief
 
 * 熟能生巧
 * 努力改变人生
 
-## 联系
+## Contact
 
 * GitHub：[@wanghaoguan](https://github.com/wanghaoguan)
-* 博客：[{{ site.title }}]({{ site.url }})
+* Blog	：[{{ site.title }}]({{ site.url }})
 
 
 ## Skill Keywords
