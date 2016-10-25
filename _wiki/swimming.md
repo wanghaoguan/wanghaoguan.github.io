@@ -8,8 +8,6 @@ keywords: 游泳, 蛙泳
 
 ## 蛙泳
 
-我目前能游出最远距离的泳姿。
-
 ### 视频
 
 * [蛙泳教学完整版](http://v.youku.com/v_show/id_XMjgwOTA4OTI0.html?from=s1.8-1-1.2)
