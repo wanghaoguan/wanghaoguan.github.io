@@ -4,10 +4,10 @@
 baseurl:
 url: http://guansir.me
 date_format: "ordinal"
-title: Knight
+title: Guan's Blog
 subtitle: "Just Do IT "
 description: "关王豪的个人博客"
-keywords: Knight, Guan, blog
+keywords: Guan, blog
 favicon: /favicon.ico
 timezone: Asia/Changsha
 encoding: "utf-8"
