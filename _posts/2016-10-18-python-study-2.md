@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python基础（二）
+title: Python学习笔记（二）
 categories: Python
 description: python的学习
 keywords: python,basic
