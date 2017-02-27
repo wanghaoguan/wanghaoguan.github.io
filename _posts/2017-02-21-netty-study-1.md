@@ -30,19 +30,19 @@ Netty的线程模型类似于一种主从多线程模型，这时服务端用于
 一个callback就是一个方法，一个提供给另一个的方法的引用。这让另一个方法可以在适当的时候回过头来调用这个callback方法，是用于通知相关方某个操作已经完成最常用的方法之一。
 Netty在处理事件时内部使用了callback；当一个callback被触发，事件可以被ChannelHandler的接口实现处理。下面的代码是一个例子：当一个新的连接建立后，ChannelHandler的callback方法channnelActive()会被调用，然后打印一条消息。  
 ![callback](/images/posts/netty/callback.png)
-#####Future
+##### Future
 一个Future提供了另一个当操作完成时如何通知应用的方法。Future对象充当了一个存放异步操作结果的占位符角色；它会在将来某个时间完成并且提供对操作结果的访问。  
 JDK搭载了接口java.util.concurrent.Future, 但是提供的接口实现只允许你手动检查操作是否已经完成，或者就一直阻塞到操作完成。这非常麻烦，所以Netty提供了它自己的ChannelFuture实现，用于执行异步操作。  
 ChannelFuture提供了额外的方法让我们可以注册一个或者多个ChannelFutureListener实例。监听者的callback方法operationComplete()在操作完成时被调用，然后监听者可以查看这个操作是否成功完成。简单来说，ChannelFutureListener提供的通知机制免去了手动检查操作完成情况的麻烦。  
 每个Netty输出的IO操作都会返回一个ChannelFuture；`就是说，没有一个操作是阻塞的`。就像我们之前所说的，Netty由下至上都是异步和事件驱动的。  
 以下代码展示了如何利用ChannelFutureListener。首先连接到一个远端，然后用connect()返回的ChannelFuture注册一个新的ChannnelFutureListener。当监听器被通知连接建立时，检查状态(1)。如果这个操作成功，写数据到这个Channel；否则从ChannelFuture中读取Throwable。  
 ![callback-2](/images/posts/netty/运作中的callback.png)  
-#####Events和Handlers
+##### Events和Handlers
 Netty用细分的events来通知我们状态的变化或者操作的状况，这让我们可以基于发生的events来触发适当的行为（日志记录、数据传送、流控制、应用逻辑）。  
 Netty是一个网络编程框架，所以events按他们和输入或者输出数据流的关系来分类。可能被输入数据或者相关状态触发的events包括：活跃或者停用的连接、读数据、用户events、错误events。而输出event则是会触发将来行为的操作的结果，可能会是：打开或者关闭到远端的连接、写或刷数据到一个socket。  
 每一个event都可以被分派到一个用户实现的handler对象的方法。下面展示了一个event如何被一串这样的event handler处理。`可以认为每个handler实例就是一种响应某个具体event的callback`
 ![events](/images/posts/netty/eventHandler处理.png)  
-#####汇总
+##### 汇总
 Netty的异步编程模型是建立在Future和callbacks概念之上的，在更深一层分派事件到handler方法。这些元素结合起来提供了一个处理环境，让你的应用逻辑可以逐步发展而不用关心网络操作。这一个Netty设计方案的一个关键目标。  
 Netty通过引发事件把Selector从应用中抽象出来，省掉了所有原本需要手写的调度代码。在内部，一个EventLoop被分配到每个Channel来处理所有的events，包括注册感兴趣的events、分派events到ChannelHandlers、安排将来的行为。  
 EventLoop自己仅由一个线程驱动，这个线程处理一个Channel所有的I/O事件，这个关系在Eventloop的生命周期内不会改变。这个简单强大的设计消除了任何你可能对ChannelHandler同步的顾虑，因此你能够专注于在数据被处理时，提供正确的执行逻辑。
