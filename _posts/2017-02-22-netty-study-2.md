@@ -6,6 +6,12 @@ description: Netty的学习
 keywords: Netty,basic
 ---
 
+今天的任务是创建一个基于Netty的客户端和服务器：
+  
+* 创建开发环境  
+* 编写一个服务器和客户端  
+* 编译测试应用
+
 ### 创建开发环境
 
 为了完成项目，需要用到的工具是JDK和Apache Maven，它们都是免费下载的。  
