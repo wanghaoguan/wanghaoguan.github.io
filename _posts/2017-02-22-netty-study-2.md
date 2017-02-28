@@ -4,12 +4,7 @@ title: Netty学习笔记（二）
 categories: Netty
 description: Netty的学习
 keywords: Netty,basic
----
-
-今天的主要任务是：  
-* 创建开发环境  
-* 编写一个Echo服务器和客户端  
-* 编译测试应用  
+---  
 
 ### 创建开发环境
 为了完成项目，需要用到的工具是JDK和Apache Maven，它们都是免费下载的。  
