@@ -42,7 +42,7 @@ Maven是一个广泛使用的项目构建管理工具，由Apache软件公司开
 * 至少一个ChannelHandler--实现服务器如何处理从客户端收到的数据  
 * Bootstrapping--这是配置服务器的启动代码。至少要做的是，他把服务器绑到一个可以监听连接请求的端口上。
 
-###### ChannelHandlers
+##### ChannelHandlers
 
 ChannelHandler，它是一组接口的父类，这些接口的实现类接收并且响应事件通知。在Netty应用中，所有的数据处理逻辑都是包含在这些核心抽象(core abstractions)的实现类里的。  
 
