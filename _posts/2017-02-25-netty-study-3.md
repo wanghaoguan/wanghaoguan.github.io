@@ -1,0 +1,21 @@
+---
+layout: post
+title: 详解ServerBootstrap
+categories: Netty
+description: Netty的学习
+keywords: Netty,basic
+---
+
+ServerBootstrap负责初始化netty服务器，并且开始监听端口的socket请求。
+
+![ServerBootstrap-1](/images/posts/netty/ServerBootstrap.png)  
+ServerBootstrap用一个ServerSocketChannelFactory来实例化。ServerSocketChannelFactory 有两种选择，一种是NioServerSocketChannelFactory，一种是OioServerSocketChannelFactory。 前者使用NIO，后则使用普通的阻塞式IO。它们都需要两个线程池实例作为参数来初始化，一个是boss线程池，一个是worker线程池。  
+ServerBootstrap.bind(int)负责绑定端口，当这个方法执行后，ServerBootstrap就可以接受指定端口上的socket连接了。一个ServerBootstrap可以绑定多个端口。  
+##### boss线程和worker线程
+ServerBootstrap监听的一个端口对应一个boss线程，它们一一对应。比如你需要netty监听8080端口和9999端口，那么就会有两个boss线程分别负责处理来自两个端口的socket请求。在boss线程接收了socket连接请求后，会产生一个channel（一个打开的socket对应一个打开的channel），并把这个channel交给ServerBootstrap初始化指定的ServerSocketChannelFactory来处理，boss线程则继续处理socket的请求。  
+ServerSocketChannelFactory则会从worker线程池中找出一个worker线程来处理这个请求。如果是OioServerSocketChannelFactory的话，那么这个channel上所有的socket消息，从开始到channel（socket）关闭，都只由这个特定的worker来处理，也就是说一个打开的socket对应一个指定的worker线程，这个worker线程在socket没有关闭的情况下，也只能为这个socket处理消息，无法服务其他socket。  
+如果是NioServerSocketChannelFactory的话则不然，每个worker可以服务不同的socket或者说channel，worker线程和channel不再有一一对应的关系。显然，NioServerSocketChannelFactory只需要少量活动的worker线程就能很好的处理众多的channel，而OioServerSocketChannelFactory则需要与打开channel等量的worker线程来服务。  
+线程是一种资源，所以当netty服务器需要处理长连接的时候，最好选择NioServerSocketChannelFactory，这样可以避免创建大量的worker线程。在用作http服务器的时候，也最好选择NioServerSocketChannelFactory，`因为现代浏览器都会使用http keepalive功能（可以让浏览器的不同http请求共享一个信道），这也是一种长连接`。  
+##### worker线程的生命周期
+当某个channel有消息到达或者有消息需要写入socket的时候，worker线程就会从线程池中取出一个。在worker线程中，消息会经过设定好的ChannelPipeline处理。ChannelPipeline就是一堆有序的filter，它分为两部分：UpStreamHandler和DownStreamHandler。**Pipeline**  
+
