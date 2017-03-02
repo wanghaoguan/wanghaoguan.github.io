@@ -18,4 +18,31 @@ ServerSocketChannelFactory则会从worker线程池中找出一个worker线程来
 线程是一种资源，所以当netty服务器需要处理长连接的时候，最好选择NioServerSocketChannelFactory，这样可以避免创建大量的worker线程。在用作http服务器的时候，也最好选择NioServerSocketChannelFactory，`因为现代浏览器都会使用http keepalive功能（可以让浏览器的不同http请求共享一个信道），这也是一种长连接`。  
 ##### worker线程的生命周期
 当某个channel有消息到达或者有消息需要写入socket的时候，worker线程就会从线程池中取出一个。在worker线程中，消息会经过设定好的ChannelPipeline处理。ChannelPipeline就是一堆有序的filter，它分为两部分：UpStreamHandler和DownStreamHandler。**Pipeline**  
+客户端送入的消息会首先由许多**UpstreamHandler** 依次处理，处理得到的数据送入应用的业务逻辑handler，通常用**SimpleChannelUpstreamHandler** 来实现这一部分。  
+`public class` 
+  `SimpleChannelUpstreamHandler{ `  
 
+        public void messageReceived(ChannelHandlerContext c,MessageEvent e) throws Exception{    
+           //业务逻辑开始掺入  
+       }
+`}`  
+对于Nio当**messageReceived()** 方法执行后，如果没有产生异常，worker线程就执行完毕，它会被线程池回收。业务逻辑handler会通过一些方法，把返回的数据交给指定好顺序的**DownStreamHandler** 处理，处理后的数据如果需要，会被写入channel，进而通过绑定的socket发送给客户端。这个过程是由另外一个线程池中的worker线程来完成的。而对于Oio来说，从始至终，都是由一个指定的worker来处理。
+##### 减少worker线程的处理占用时间
+worker线程是由netty内部管理，统一调配的一种资源，所以最好应该尽快的让worker线程执行完毕，返回给线程池回收利用。worker线程的大部分时间消耗在**ChannelPipeline** 的各种**handler** 中，而在这些handler中，一般是负责应用程序业务逻辑掺入的那个handler最占时间，它通常是排在最后的**UpStreamHandler**。所以通过把这部分处理内容交给另外一个线程来处理，可以有效的减少worker线程的周期循环时间，一般有两种方法：  
+
+* messageReceived()方法中开启一个新的线程来处理业务逻辑  
+
+  `public void messageReceived``(ChannelHandlerContext ctx, MessageEvent e)   throws Exception{     `
+     `    ...    `  
+     `    new Thread(...).start();    `
+ `}`  
+在messageReceived()中开启一个新线程来继续处理业务逻辑，而worker线程在执行完messageReceived()就会结束了。更加优雅的方法是另外构造一个线程池来提交业务逻辑处理任务。 
+ 
+* 利用netty框架自带的ExecutionHandler
+![ExecutionHandler-1](/images/posts/netty/ExecutionHandler.png)  
+把共享的ExecutionHandle实例放置在业务逻辑handler之前即可，注意ExecutionHandle一定要在不同的pipeline之间共享。它的作用是自动从ExecutionHandle自己管理的一个线程池中拿出一个线程来处理排在它后面的业务逻辑handler。而worker线程在经过ExecutionHandle后就结束了，它会被ChannelFactory的worker线程池所回收。  
+它的构造方法是ExecutionHandler(Executor executor) ，很显然executor就是ExecutionHandler内部管理的线程池了。  
+##### NIO处理方式
+![ChannelPipeline-1](/images/posts/ChannelPipeline.png)  
+1、Netty用一个Boss线程去处理客户端的接入，创建Channel；  
+2、
