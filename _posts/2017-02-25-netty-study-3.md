@@ -43,6 +43,7 @@ worker线程是由netty内部管理，统一调配的一种资源，所以最好
 把共享的ExecutionHandle实例放置在业务逻辑handler之前即可，注意ExecutionHandle一定要在不同的pipeline之间共享。它的作用是自动从ExecutionHandle自己管理的一个线程池中拿出一个线程来处理排在它后面的业务逻辑handler。而worker线程在经过ExecutionHandle后就结束了，它会被ChannelFactory的worker线程池所回收。  
 它的构造方法是ExecutionHandler(Executor executor) ，很显然executor就是ExecutionHandler内部管理的线程池了。  
 ##### NIO处理方式
+
 ![ChannelPipeline-1](/images/posts/ChannelPipeline.png)  
 1、Netty用一个Boss线程去处理客户端的接入，创建Channel；  
 2、
