@@ -44,6 +44,18 @@ worker线程是由netty内部管理，统一调配的一种资源，所以最好
 它的构造方法是ExecutionHandler(Executor executor) ，很显然executor就是ExecutionHandler内部管理的线程池了。  
 ##### NIO处理方式
 
-![ChannelPipeline-1](/images/posts/ChannelPipeline.png)  
 1、Netty用一个Boss线程去处理客户端的接入，创建Channel；  
-2、
+2、从work线程池拿出一个work线程交给boss创建好的Channel实例；  
+3、work线程进行数据读入(读到ChannelBuffer)；  
+4、接着触发相应的事件传递给ChannelPipeline进行业务处理（ChannelPipeline中包含一系列用户自定义的ChannelHandler组成的链）；  
+![ChannelPipeline-1](/images/posts/ChannelPipeline.png)  
+有一点要注意，执行整个ChannelHandler链这个过程是串行的，如果业务逻辑比较耗时，会导致work线程长时间被占用得不到释放，最终影响整个服务端的并发处理能力，所以我们一般通过ExecutionHandler线程池来异步处理ChannelHandler调用链，使得work线程经过ExecutionHandler时得到释放。  
+
+Netty为ExecutionHandler提供了两种可选的线程池模型：  
+
+* MemoryAwareThreadPoolExecutor
+通过对线程池内存的使用控制，可控制Executor中待处理任务的上限（超过上限时，后续进来的任务将被阻塞），并可控制单个Channel待处理任务的上限，防止内存溢出错误；  
+处理同一个Channel的事件，是串行的方式执行的，但是同一个Channel的多个事件，可能会分布到线程中池中的多个线程去处理，不同的Channel事件可以并发处理，互相并不影响。
+
+* OrderedMemoryAwareThreadPoolExecutor
+是 1）的子类。除了MemoryAwareThreadPoolExecutor 的功能之外，它还可以保证同一Channel中处理的事件流的顺序性，这主要是控制事件在异步处理模式下可能出现的错误的事件顺序，但它并不保证同一Channel中的事件都在一个线程中执行，也没必要保证这个。  
