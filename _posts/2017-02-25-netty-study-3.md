@@ -59,3 +59,37 @@ Netty为ExecutionHandler提供了两种可选的线程池模型：
 
 * OrderedMemoryAwareThreadPoolExecutor
 是 1）的子类。除了MemoryAwareThreadPoolExecutor 的功能之外，它还可以保证同一Channel中处理的事件流的顺序性，这主要是控制事件在异步处理模式下可能出现的错误的事件顺序，但它并不保证同一Channel中的事件都在一个线程中执行，也没必要保证这个。  
+同一个Channel的事件，并不保证处理顺序，可能一个线程先处理了Channel A (Event 3)，然后另一个线程才处理Channel A (Event 2)，如果业务不要求保证事件的处理顺序，我认为还是尽量使用MemoryAwareThreadPoolExecutor比较好。  
+
+**Netty采用标准的SEDA（Staged Event-Driven Architecture）架构**  
+SEDA的核心思想是把一个请求处理过程分成几个stage，不同资源消耗的stage使用不同数量的线程来处理，stage间使用事件驱动的异步通信模式。更进一步，在每个stage中可以动态配置自己的线程数，在超载时降级运行或拒绝服务。  
+Netty所设计的事件类型，代表了网络交互的各个阶段，每个阶段发生时，会触发相应的事件并交给ChannelPipeline进行处理。事件处理都是通过Channels类中的静态方法调用开始的。  
+
+**Netty将网络事件分为两种类型：**  
+1、Upstream：上行，主要是由网络底层反馈给Netty的，比如messageReceived、channelConnected  
+2、Downstream：下行，框架自己发起的，比如bind、write、connect等
+
+**Netty的ChannelHandler分为3种类型：**  
+1、只处理Upstream事件：实现ChannelUpstreamHandler接口  
+2、只处理Downstream事件：实现ChannelDownstreamHandler接口  
+3、同时处理Upstream和Downstream事件：同时实现ChannelUpstreamHandler和ChannelDownstreamHandler接口  
+
+**Channels中事件流转静态方法：**  
+1. fireChannelOpen  
+2. fireChannelBound  
+3. fireChannelConnected  
+4. fireMessageReceived  
+5. fireWriteCompleteLater  
+6. fireWriteComplete  
+7. fireChannelInterestChangedLater  
+8. fireChannelDisconnectedLater  
+9. fireChannelDisconnected  
+10. fireChannelUnboundLater  
+11. fireChannelUnbound  
+12. fireChannelClosedLater  
+13. fireChannelClosed  
+14. fireExceptionCaughtLater  
+15. fireExceptionCaught   
+16. fireChildChannelStateChanged  
+
+ChannelPipeline 维持所有ChannelHandler的有序链表，当有Upstresam或Downstream网络事件发生时，调用匹配事件类型的 ChannelHandler来处理。ChannelHandler自身可以控制是否要流转到调用链中的下一个 ChannelHandler（ctx.sendUpstream(e)或者ctx.sendDownstream(e)）,这一样有一个好处，比如业务 数据Decoder出现非法数据时不必继续流转到下一个ChannelHandler。
