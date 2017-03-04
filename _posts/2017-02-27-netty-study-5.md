@@ -17,7 +17,7 @@ keywords: Netty,basic
 
 ##### ChannelHandler的生命周期
 接口ChannelHandler定义的生命周期相关的操作如下表。这些操作在ChannelHandler被添加到一个ChannelPipeline，或者从一个ChannelPipeline中移除时被调用。这里的每个方法都包含一个ChannelHandlerContext作为输入参数。  
-**ChannelHandler生命周期方法** 
+**ChannelHandler生命周期方法**  
 ![ChannelHandler生命周期方法-1](/images/posts/netty/ChannelHandler生命周期方法.png )  
 Netty定义了下面两个重要的ChannelHandler子接口  
 
