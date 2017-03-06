@@ -27,7 +27,15 @@ Netty定义了下面两个重要的ChannelHandler子接口
 ##### ChannelInbouundHandler接口
 下面列出了接口ChannelInboundHandler生命周期相关的方法。当收到数据，或者相关Channel的状态改变时，这些方法被调用。这些方法和Channel的生命周期密切相关。  
 **ChannelInboundHandler方法** 
-![ChannelInboundHandler方法-1](/images/posts/netty/ChannelInboundHandler方法.png )   
+![ChannelInboundHandler方法-1](/images/posts/netty/ChannelInboundHandler方法.png)   
+当一个ChannnelInboundHandler实现类重写channelRead()方法时，它要负责释放ByteBuf相关的内存。Netty提供了一工具方法ReferenceCountUtil.release()。  
+![ChannnelInboundHandler-1](/images/posts/netty/ChannnelInboundHandler.png)  
+   
+对未释放的资源，Netty会打印一个警告级别的日志消息。但是用这种方式管理资源有些麻烦。一个更简单的方法是用SimpleChannelInboundHandler。下面说明了SimpleChannelInboundHandler的用法。  
+![SimpleChannelInboundHandler-1](/images/posts/netty/SimpleChannelInboundHandler.png)  
+##### ChannelOutboundHandler接口
+
+   
 
 
 
