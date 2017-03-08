@@ -6,6 +6,10 @@ description: Netty的学习
 keywords: Netty,basic
 ---
 
+**本人Netty学习系列主要参考<http://ifeve.com/>，并结合自己的需要做学习笔记** 
+ 
+**如有侵权，请联系本人及时删除**
+
 ### Netty--基本概念
 
 Netty项目是一个提供异步事件驱动网络应用框架和快速开发可维护的高性能高扩展性服务端和客户端协议工具集的成果。  
