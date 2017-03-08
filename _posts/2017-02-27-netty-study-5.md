@@ -50,7 +50,7 @@ ChannelHandlerAdapter还提供了一个工具方法isSharable()。如果类实�
 改动ChannelPipeline的ChannelHandler方法如下表：  
 ![Pipe方法-1](/images/posts/netty/Pipe方法.png)  
 下面的代码说明了这些方法该怎么使用：  
-![Pipe方法-2](/images/posts/netty/ Pipe方法-2.png)  
+![Pipe方法-2](/images/posts/netty/Pipe方法-2.png)  
 通常ChannelPipeline中的每个ChannelHandler通过它的EventLoop（IO线程）来处理传给他的event。不阻塞这个线程是非常重要的，因为阻塞有可能会对整个IO处理造成负面影响。  
 
 
