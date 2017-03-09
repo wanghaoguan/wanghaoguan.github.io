@@ -17,7 +17,7 @@ keywords: python,basic
 正则表达式的匹配过程是：  
 依次拿出表达式和文本中的字符比较，如果每一个字符都能匹配，则匹配成功；一旦有匹配不成功的字符则匹配失败。如果表达式中有量词或边界，这个过程会稍微有一些不同。  
 下面是Python支持的正则表达式元字符和语法：  
-![RegularExpression-1](/images/posts/python/RegularExpression-1.png)
+![RegularExpression-1](/images/posts/python/RegularExpression.png)
   
 **数量词的贪婪模式与非贪婪模式**  
 正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式`ab*`如果用于查找`abbbc`，将找到`abbb`。而如果使用非贪婪的数量词`ab*?`，将找到`a`。  
