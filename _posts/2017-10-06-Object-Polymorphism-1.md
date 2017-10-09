@@ -10,8 +10,9 @@ keywords: Java,basic
 在java中，我们关心内存中的两个区域：对象的生存空间堆（heap）和方法调用及变量的生存空间栈（stack）   
 所有创建的对象，不论实际类型，都会是Object的一个实例，在堆上除了会有一个创建的对象外，还包括Object对象中的所有内容。  
 
-	当你把对象装进ArrayList<Object>时，不管它原来是什么，都只能把它当作Object对象。
-	从ArrayList<Object>中取出引用时，取出的引用类型也只能是Object。  
+	当你把对象装进ArrayList<Object>时，不管它原来是什么，都只能把它当作Object对象。  
+	从ArrayList<Object>中取出引用时，取出的引用类型也只能是Object。 
+ 
 正在执行的方法会放在栈顶，被调用方法会放在调用方法之上 
 ##### 
 * 局部变量是声明在方法内或方法的参数上；局部变量生存在栈上
