@@ -12,6 +12,8 @@ keywords: Java,basic
 
 	当你把对象装进ArrayList<Object>时，不管它原来是什么，都只能把它当作Object对象。  
 	从ArrayList<Object>中取出引用时，取出的引用类型也只能是Object。 
+
+
  
 正在执行的方法会放在栈顶，被调用方法会放在调用方法之上 
 ##### 
