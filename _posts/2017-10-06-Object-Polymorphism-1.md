@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Java笔记（一）
+title:  Java基础笔记（一）
 categories: Java
 description: Java的学习
 keywords: Java,basic
@@ -73,4 +73,4 @@ keywords: Java,basic
 * 静态的方法不能调用非静态的变量
 * 静态变量的值只能初始化一次，且对所有的实例都相同，同一个类所有的实例变量共享一份静态变量
 * 静态变量会在该类的任何对象创建之前和任何静态方法执行之前完成初始化
-* 
+
