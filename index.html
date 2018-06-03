@@ -213,6 +213,11 @@
         }));
 
         runAsync().start();
+
+        document.addEventListener('touchstart', function() {
+            document.getElementById('audios').play()
+         })
+
     })();
     </script>
 
