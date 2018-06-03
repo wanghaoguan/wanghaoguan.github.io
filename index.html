@@ -214,9 +214,9 @@
 
         runAsync().start();
 
-        document.addEventListener('touchstart', function() {
-            document.getElementById('audios').play()
-         })
+        $('html').on('touchstart',function(){
+            audio.play();
+        });
 
     })();
     </script>
