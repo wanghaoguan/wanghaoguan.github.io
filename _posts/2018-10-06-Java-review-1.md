@@ -1,3 +1,11 @@
+---
+layout: post
+title:  Java参考大全（一）
+categories: Java
+description: Java的学习
+keywords: Java
+---
+
 ### 一维数组
 
 int month_days[] = new int[12]; 
