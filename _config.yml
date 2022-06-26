@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://guansir.me
+url: http://wanghaoguan.github.io
 date_format: "ordinal"
 title: Guan's Blog
 subtitle: "Just Do IT "
